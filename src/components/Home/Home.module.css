@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;    
+    color: #1E2C5F;
+    background: rgb(183,183,255);
+    background: -moz-linear-gradient(348deg, rgba(183,183,255,1) 0%, rgba(230,230,255,1) 47%);
+    background: -webkit-linear-gradient(348deg, rgba(183,183,255,1) 0%, rgba(230,230,255,1) 47%);
+    background: linear-gradient(348deg, rgba(183,183,255,1) 0%, rgba(230,230,255,1) 47%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#b7b7ff",endColorstr="#e6e6ff",GradientType=1);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.container, .copyTextArea {
+    background: rgb(246, 246, 255);
+    padding: 15px 30px;
+    margin: 90px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.copyText {
+    width: 100%;
+}
+
+.readingSpeed, .startReading {
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.startReading {
+    text-decoration: none;
+    border: none;
+    background-color: rgb(34, 34, 136);
+    transition: all 0.3s;
+    color: white;
+}
+
+.startReading:hover {
+    background-color: rgb(54, 54, 219);
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #121b3b;
+    color: white;
+    min-height: 8vh;
+    padding: 10px;
+}
+
+@media (min-width: 768px) {
+    .container, .copyTextArea {
+        width: 70%;
+        margin: 50px auto;
+        padding: 100px;
+        border-radius: 10px;
+        box-shadow: 5px 20px 18px rgb(191, 191, 231);
+    }
+}
+

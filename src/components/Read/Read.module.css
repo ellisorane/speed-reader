@@ -1,0 +1,21 @@
+.readContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    min-height: 100vh;
+    background-color: #131f49;
+    color: rgb(246, 246, 255);
+}
+
+.textControls {
+    display: flex;
+}
+
+.textControls div {
+    margin: 40px;
+    font-size: 50px;
+    cursor: pointer;
+    padding: 0 10px;
+}
