@@ -1,5 +1,7 @@
 import { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
+
 
 import classes from "../Auth.module.css";
 
@@ -13,7 +15,7 @@ const Signup = () => {
 
     const emailRef = useRef();
     const passwordRef = useRef();
-    const { login } = useAuth();
+    const { login, setLoggedIn } = useAuth();
     const history = useHistory();
 
 
@@ -24,6 +26,7 @@ const Signup = () => {
             setError('');
             setLoading(true);
             await login(emailRef.current.value, passwordRef.current.value);
+            setLoggedIn(true);
             history.push('/');
         } catch {
             setError('Failed to sign in');
@@ -35,17 +38,19 @@ const Signup = () => {
     return (
         <div>
             <div className={classes.container}>
-                <h1>Login</h1>
-                {error && <h3 className={classes.error}>{error}</h3>}
-                <form onSubmit={loginHandler}>
-                    <label htmlFor="">Email</label> <br />
-                    <input type="email" name="email" id="" ref={emailRef} /> <br />
-                    <label htmlFor="">Password</label> <br />
-                    <input type="password" name="password" id="" ref={passwordRef} /> <br />
-                    <button type="submit" className={classes.btn} disabled={loading}>Login</button> 
-                    <p>Don't have an account?</p>
-                    <a href="/signup">Signup</a>
-                </form>
+                <div className={classes.border}>
+                    <h1>Login</h1>
+                    {error && <h3 className={classes.error}>{error}</h3>}
+                    <form onSubmit={loginHandler}>
+                        <label htmlFor="">Email</label> <br />
+                        <input type="email" name="email" id="" ref={emailRef} required /> <br />
+                        <label htmlFor="">Password</label> <br />
+                        <input type="password" name="password" id="" ref={passwordRef} required /> <br />
+                        <button type="submit" className={classes.btn} disabled={loading}>Login</button> 
+                        <p><NavLink to="/forgot_password">Forgot password?</NavLink> </p>
+                        <p><NavLink to="/signup">Don't have an account?</NavLink></p>
+                    </form>
+                </div>
             </div>
         </div>
     )

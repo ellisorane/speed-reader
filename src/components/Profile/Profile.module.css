@@ -8,6 +8,26 @@
     align-items: center;
 }
 
+.btn {
+    text-decoration: none;
+    outline: none;
+    border: none;
+    margin: 5px;
+    background-color: rgb(34, 34, 136);
+    padding: 10px;
+    font-size: 15px;
+    color: white;
+    transition: all 0.3s;
+    border-radius: 5px;
+}
+
+.error {
+    color: rgb(141, 9, 9);
+}
+
+.message {
+    color: rgb(12, 148, 7);
+}
 
 @media (min-width: 678px ) {
     

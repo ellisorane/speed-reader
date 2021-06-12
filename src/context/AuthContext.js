@@ -14,13 +14,24 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [loggedIn, setLoggedIn] = useState(false);
 
+    const updateEmail = (email) => {
+        return currentUser.updateEmail(email)
+    }
+
+    const updatePassword = (password) => {
+        return currentUser.updatePassword(password)
+    }
+
+    const resetPassword = (email) => {
+        return auth.sendPasswordResetEmail(email);
+    }
+
     const logout = () => {
         setLoggedIn(false);
         return auth.signOut();
     }
 
     const login = (email, password) => {
-        setLoggedIn(true);
         return auth.signInWithEmailAndPassword(email, password);
     }
 
@@ -43,7 +54,11 @@ export const AuthProvider = ({ children }) => {
         signup,
         login,
         loggedIn,
-        logout
+        setLoggedIn,
+        logout,
+        resetPassword,
+        updateEmail,
+        updatePassword
     }
 
     return (

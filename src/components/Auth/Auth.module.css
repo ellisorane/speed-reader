@@ -9,13 +9,26 @@
     align-items: center;
 }
 
+.border {
+    padding: 30px;
+    border: 1px solid rgb(213, 220, 223);
+    border-radius: 10px;
+}
+
 .error {
     color: rgb(141, 9, 9);
 }
 
+.message {
+    color: rgb(12, 148, 7);
+}
+
 input {
-    padding: 5px;
+    padding: 10px 25px;
     width: 100%;
+    border-radius: 10px;
+    border: 1px solid rgb(190, 199, 202);
+    outline: none;
 }
 
 .btn {
@@ -24,7 +37,7 @@ input {
     margin: 5px;
     background-color: rgb(34, 34, 136);
     padding: 10px;
-    font-size: 20px;
+    font-size: 15px;
     color: white;
     transition: all 0.3s;
     border-radius: 5px;

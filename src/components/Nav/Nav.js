@@ -23,8 +23,8 @@ const Nav = () => {
     const logoutHandler = async() => {
         setError('');
         try {
-            await logout();
             history.push('/login');
+            await logout();
         } catch {
             setError('Failed to logout');
         }
