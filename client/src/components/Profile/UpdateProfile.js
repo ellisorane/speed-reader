@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { NavLink } from "react-router-dom";
 
-import { useAuth } from '../../context/AuthContext';
-
 import classes from './Profile.module.css';
 
 
@@ -14,7 +12,6 @@ const UpdateProfile = () => {
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    const { currentUser, updateEmail, updatePassword } = useAuth();
 
 
     const updateUserHandler = (e) => {
@@ -31,13 +28,13 @@ const UpdateProfile = () => {
 
 
         //if new email is different from old email, push updateEmail to promises
-        if (emailRef.current.value !== currentUser.email) {
-            promises.push(updateEmail(emailRef.current.value));
-        }
+        // if (emailRef.current.value !== currentUser.email) {
+        //     promises.push(updateEmail(emailRef.current.value));
+        // }
         //if there is a password value, push updatePassword to promises
-        if (passwordRef.current.value) {
-                promises.push(updatePassword(passwordRef.current.value));
-        }
+        // if (passwordRef.current.value) {
+        //         promises.push(updatePassword(passwordRef.current.value));
+        // }
 
         Promise.all(promises).then(() => {
             setMessage('Profile successfully updated');
@@ -59,7 +56,7 @@ const UpdateProfile = () => {
                         {message && <h3 className={classes.message}>{message}</h3>}
                         <form onSubmit={updateUserHandler}>
                             <label htmlFor="">Email</label> <br />
-                            <input type="email" name="email" id="" ref={emailRef} defaultValue={currentUser.email}required /> <br />
+                            <input type="email" name="email" id="" ref={emailRef} defaultValue="" required /> <br />
                             <label htmlFor="">Password</label> <br />
                             <input type="password" name="password" id="" ref={passwordRef} placeholder="Optional" /> <br />
                             <label htmlFor="">Confirm Password</label> <br />

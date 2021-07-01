@@ -1,4 +1,3 @@
-import { config } from '../../firebase';
 
 import classes from './Share.module.css';
 

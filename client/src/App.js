@@ -1,10 +1,10 @@
+import { useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
-
-import { AuthProvider } from './context/AuthContext';
+import axios from 'axios';
 
 import Nav from './components/Nav/Nav';
 import Home from './components/Home/Home';
@@ -14,13 +14,12 @@ import Profile from './components/Profile/Profile';
 import UpdateProfile from './components/Profile/UpdateProfile';
 import Login from './components/Auth/Login/Login';
 import Signup from './components/Auth/Signup/Signup';
-import ForgotPassword from './components/Auth/ForgotPassword/ForgotPassword';
 
 import './App.css';
 
 function App() {
+
   return (
-    <AuthProvider>
       <Router>
         <div>
           <Nav />
@@ -47,14 +46,10 @@ function App() {
             <Route exact path="/signup">
               <Signup />
             </Route>
-            <Route exact path="/forgot_password">
-              <ForgotPassword />
-            </Route>
 
           </Switch>
         </div>
       </Router>
-    </ AuthProvider>
 
     
   );

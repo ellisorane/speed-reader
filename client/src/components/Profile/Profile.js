@@ -3,17 +3,14 @@ import { NavLink } from "react-router-dom";
 
 import classes from './Profile.module.css';
 
-import { useAuth } from '../../context/AuthContext';
 
 
 const Profile = () => {
 
-    const { currentUser } = useAuth();
-    const username = currentUser.email.split('@')[0];
     return (
         <div>
             <div className={classes.container}>
-                <h1>{username}</h1>
+                {/* <h1>{username}</h1> */}
                 <NavLink to="/update_profile" className={classes.btn}>Update Profile</NavLink>
                 <div className={classes.innerContainer}>
                     <div className={classes.savedTexts}>
