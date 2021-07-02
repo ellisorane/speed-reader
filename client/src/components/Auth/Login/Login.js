@@ -1,35 +1,49 @@
-import { useRef, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+// import { useHistory } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
 
+import { authActions } from '../../../store/auth';
 
 import classes from "../Auth.module.css";
 
 
-const Signup = () => {
+const Login = ({ loadUser }) => {
 
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+    });
+    const { email, password } = formData;
 
-    const emailRef = useRef();
-    const passwordRef = useRef();
-    const history = useHistory();
+    const dispatch = useDispatch();
 
+    const dataOnChangeHandler = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const loginHandler = async (e) => {
         e.preventDefault();
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const body = JSON.stringify({ email, password });
         
         try {
             setError('');
-            setLoading(true);
-            // await login(emailRef.current.value, passwordRef.current.value);
-            // setLoggedIn(true);
-            history.push('/');
+
+            const res = await axios.post('/api/auth', body, config);
+            dispatch(authActions.authSuccess(res.data));
+            loadUser();
+            // history.push('/');
         } catch {
             setError('Failed to sign in');
         }
 
-        setLoading(false);
     }
 
     return (
@@ -40,10 +54,11 @@ const Signup = () => {
                     {error && <h3 className={classes.error}>{error}</h3>}
                     <form onSubmit={loginHandler}>
                         <label htmlFor="">Email</label> <br />
-                        <input type="email" name="email" ref={emailRef} required /> <br />
+                        <input type="email" name="email" onChange={e => dataOnChangeHandler(e)} required /> <br />
                         <label htmlFor="">Password</label> <br />
-                        <input type="password" name="password" ref={passwordRef} required /> <br />
-                        <button type="submit" className={classes.btn} disabled={loading}>Login</button> 
+                        <input type="password" name="password" onChange={e => dataOnChangeHandler(e)} required /> <br />
+                        <label htmlFor="">Confirm Password</label> <br />
+                        <button type="submit" className={classes.btn}>Login</button> 
                         <p><NavLink to="/forgot_password">Forgot password?</NavLink> </p>
                         <p><NavLink to="/signup">Don't have an account?</NavLink></p>
                     </form>
@@ -53,4 +68,4 @@ const Signup = () => {
     )
 }
 
-export default Signup;
+export default Login;

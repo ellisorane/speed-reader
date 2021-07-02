@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialAuthState = {
-    user: null,
     token: localStorage.getItem('token'),
+    user: null,
     loading: true,
     loggedIn: false
 }
@@ -16,12 +16,19 @@ const authSlice = createSlice({
             state.loading = false;
             state.user = action.payload;
         },
-        logInSignup(state, action) {
+        authSuccess(state, action) {
             localStorage.setItem('token', action.payload.token)
+            state.token = localStorage.getItem('token');
             state.loading = false;
             state.loggedIn = true;
-            console.log(state.user);
         },
+        noAuth(state) {
+            localStorage.removeItem('token');
+            state.user = null;
+            state.token = null;
+            state.loading = false;
+            state.loggedIn = false;
+        }
         
     }
 })

@@ -12,6 +12,7 @@ const User = require('../../models/User');
 // @access  Private
 router.get('/', auth, async (req, res) => {
     try {
+        // See auth middleware file to see where req.user came from 
         const text = await Text.find({ user: req.user.id }).sort({ date: -1 });
         res.json(text);
     } catch (error) {

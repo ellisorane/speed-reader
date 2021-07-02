@@ -4,25 +4,25 @@ import { NavLink } from "react-router-dom";
 import axios from 'axios';
 
 import { authActions } from '../../../store/auth';
-import setAuthToken from '../../../utils/setAuthToken';
-
     
 import classes from "../Auth.module.css";
 
 
-const Signup = () => {
+const Signup = ({ loadUser }) => {
 
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
-    const [loading, setLoading] = useState(false);
+    const loading = useSelector(state => state.auth.loading);
+    const loggedIn = useSelector(state => state.auth.loggedIn);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
         passwordConfirm: ''
-    })
+    });
+    const { email, password, passwordConfirm } = formData;
+
     const dispatch = useDispatch();
 
-    const { email, password, passwordConfirm } = formData;
     
     const dataOnChangeHandler = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
     const signupHandler = async (e) => {
@@ -41,26 +41,12 @@ const Signup = () => {
         }
         
         try {
-            console.log([email, password, passwordConfirm])
             setError('');
             setMessage('');
-            setLoading(true);
             const res = await axios.post('/api/user', body, config);
-            dispatch(authActions.logInSignup(res.data));
+            dispatch(authActions.authSuccess(res.data));
 
-            // Load user 
-            const loadUser = async() => {
-                if (localStorage.token) {
-                    setAuthToken(localStorage.token);
-                }
-                try {
-                    const res = await axios.get('/api/auth');
-                    dispatch(authActions.loadUser(res.data));
-                } catch (error) {
-                    // dispatch({ type: AUTH_ERROR });
-                    console.log('Failed to load user');
-                }
-            }
+            loadUser();
 
             setMessage('Account successfully created');
 
@@ -73,7 +59,6 @@ const Signup = () => {
             setError('Failed to create account');
         }
 
-        setLoading(false);
     }
 
 
@@ -92,13 +77,12 @@ const Signup = () => {
                             <input type="password" name="password" onChange={e => dataOnChangeHandler(e)} required /> <br />
                             <label htmlFor="">Confirm Password</label> <br />
                             <input type="password" name="passwordConfirm" onChange={e => dataOnChangeHandler(e)} required /> <br />
-                            <button type="submit" className={classes.btn} disabled={loading}>Signup</button> 
+                            <button type="submit" className={classes.btn}>Signup</button> 
                             <p><NavLink to="/login">Already have an account?</NavLink></p>
                         </form>
                     </div>
                 </div>
             </div>
-        // </AuthProvider>
     )
 }
 
