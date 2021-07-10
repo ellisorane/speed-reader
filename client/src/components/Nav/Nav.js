@@ -11,8 +11,9 @@ const Nav = () => {
     const [navOpen, setNavOpen] = useState(false);
     const [error, setError] = useState('');
     const textSubmitted = useSelector(state => state.reading.textSubmitted);
+    const loggedIn = useSelector(state => state.auth.loggedIn);
     const history = useHistory();
-
+    const dispatch = useDispatch();
 
 
     const handleNavOpen = () => {
@@ -21,12 +22,8 @@ const Nav = () => {
     
     const logoutHandler = async() => {
         setError('');
-        try {
-            history.push('/login');
-            // await logout();
-        } catch {
-            setError('Failed to logout');
-        }
+        dispatch(authActions.noAuth());
+        history.push('/login');
     }
 
     return (
@@ -40,12 +37,11 @@ const Nav = () => {
                     <li><NavLink className={classes.navLink} exact to="/" activeClassName={classes.activeLink}>Home</NavLink></li>
                     {/* Only show 'Reading...' if reading state is true */}
                     {textSubmitted && <li><NavLink className={classes.navLink} to="/reading" activeClassName={classes.activeLink}>Reading</NavLink></li>}
-                    <li><NavLink className={classes.navLink} to={"/share"} activeClassName={classes.activeLink}>Share</NavLink></li>
-                    {/* { loggedIn && <li><NavLink className={classes.navLink} to={"/profile"} activeClassName={classes.activeLink}>Profile</NavLink></li> } */}
+                    {/* <li><NavLink className={classes.navLink} to={"/share"} activeClassName={classes.activeLink}>Share</NavLink></li> */}
+                    { loggedIn && <li><NavLink className={classes.navLink} to={"/profile"} activeClassName={classes.activeLink}>Profile</NavLink></li> }
 
-                    {/* { !loggedIn ? <li><NavLink className={classes.navLink} to={"/login"} activeClassName={classes.activeLink}>Login</NavLink></li> :
-                    <li className={classes.navLink} onClick={logoutHandler}>Logout</li> } */}
-                    <li><NavLink className={classes.navLink} to={"/login"} activeClassName={classes.activeLink}>Login</NavLink></li>
+                    { !loggedIn ? <li><NavLink className={classes.navLink} to={"/login"} activeClassName={classes.activeLink}>Login</NavLink></li> :
+                    <li className={classes.navLink} onClick={logoutHandler}>Logout</li> }
                 </ul>
         
                 <div className={classes.burger} onClick={handleNavOpen}>

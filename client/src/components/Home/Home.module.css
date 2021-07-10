@@ -31,13 +31,15 @@ main {
     width: 100%;
 }
 
-.readingSpeed, .startReading {
+.readingSpeed, .btn {
     padding: 10px;
     border-radius: 5px;
     outline: none;
 }
 
-.startReading {
+.btn {
+    font-size: 15px;
+    margin-bottom: 10px;
     text-decoration: none;
     border: none;
     background-color: rgb(34, 34, 136);
@@ -45,7 +47,7 @@ main {
     color: white;
 }
 
-.startReading:hover {
+.btn:hover {
     background-color: rgb(54, 54, 219);
 }
 

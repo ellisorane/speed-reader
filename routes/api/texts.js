@@ -25,11 +25,11 @@ router.get('/', auth, async (req, res) => {
 // @desc    Save a text
 // @access  Private
 router.post('/', [auth,
-    [
-        check('title', 'Title is required').not().isEmpty(),
-        check('content', 'Content is required').not().isEmpty()
-    ]],
-    async (req, res) => {
+[
+    check('title', 'Title is required').not().isEmpty(),
+    check('content', 'Content is required').not().isEmpty()
+]],
+async (req, res) => {
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -37,9 +37,7 @@ router.post('/', [auth,
     }
 
     try {
-        
-        const user = await User.findById(req.user.id).select('-password');
-    
+
         const newText = new Text({
             title: req.body.title,
             content: req.body.content,

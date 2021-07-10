@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
 
 import { authActions } from '../../../store/auth';
@@ -19,6 +19,7 @@ const Login = ({ loadUser }) => {
     const { email, password } = formData;
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const dataOnChangeHandler = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -39,7 +40,7 @@ const Login = ({ loadUser }) => {
             const res = await axios.post('/api/auth', body, config);
             dispatch(authActions.authSuccess(res.data));
             loadUser();
-            // history.push('/');
+            history.push('/profile');
         } catch {
             setError('Failed to sign in');
         }
@@ -59,8 +60,7 @@ const Login = ({ loadUser }) => {
                         <input type="password" name="password" onChange={e => dataOnChangeHandler(e)} required /> <br />
                         <label htmlFor="">Confirm Password</label> <br />
                         <button type="submit" className={classes.btn}>Login</button> 
-                        <p><NavLink to="/forgot_password">Forgot password?</NavLink> </p>
-                        <p><NavLink to="/signup">Don't have an account?</NavLink></p>
+                        <p><NavLink to="/signup">Don't have an account? Signup</NavLink></p>
                     </form>
                 </div>
             </div>

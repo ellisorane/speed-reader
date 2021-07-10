@@ -19,3 +19,23 @@
     cursor: pointer;
     padding: 0 10px;
 }
+
+.saveBtn {
+    cursor: pointer;
+    background-color: #5878ee;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.saveBtn:active {
+    background-color: #3450b6;
+}
+
+.saveTitle {
+    margin-top: 30px;
+    text-align: center;
+}

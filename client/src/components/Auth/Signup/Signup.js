@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { NavLink } from "react-router-dom";
 import axios from 'axios';
 
@@ -11,9 +12,7 @@ import classes from "../Auth.module.css";
 const Signup = ({ loadUser }) => {
 
     const [error, setError] = useState('');
-    const [message, setMessage] = useState('');
     const loading = useSelector(state => state.auth.loading);
-    const loggedIn = useSelector(state => state.auth.loggedIn);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -22,7 +21,7 @@ const Signup = ({ loadUser }) => {
     const { email, password, passwordConfirm } = formData;
 
     const dispatch = useDispatch();
-
+    const history = useHistory();
     
     const dataOnChangeHandler = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
     const signupHandler = async (e) => {
@@ -42,13 +41,12 @@ const Signup = ({ loadUser }) => {
         
         try {
             setError('');
-            setMessage('');
             const res = await axios.post('/api/user', body, config);
             dispatch(authActions.authSuccess(res.data));
 
             loadUser();
 
-            setMessage('Account successfully created');
+            history.push('/profile');
 
         } catch(err) {
             const errors = err.response.data.errors;
@@ -66,10 +64,8 @@ const Signup = ({ loadUser }) => {
             <div>
                 <div className={classes.container}>
                     <div className={classes.border}>
-                        {/* <button onClick={signupHandler}>Test Button</button> */}
                         <h1>Signup</h1>
                         {error && <h3 className={classes.error}>{error}</h3>}
-                        {message && <h3 className={classes.message}>{message}</h3>}
                         <form onSubmit={signupHandler}>
                             <label htmlFor="">Email</label> <br />
                             <input type="email" name="email" onChange={e => dataOnChangeHandler(e)} required /> <br />

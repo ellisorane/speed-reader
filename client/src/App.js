@@ -12,7 +12,6 @@ import Home from './components/Home/Home';
 import Read from './components/Read/Read';
 import Share from './components/Share/Share';
 import Profile from './components/Profile/Profile';
-import UpdateProfile from './components/Profile/UpdateProfile';
 import Login from './components/Auth/Login/Login';
 import Signup from './components/Auth/Signup/Signup';
 import setAuthToken from './utils/setAuthToken';
@@ -59,12 +58,9 @@ function App() {
             <Route exact path="/share">
               <Share />
             </Route>
-            {/* if not logged in don't allow access to Profile and UpdateProfile  */}
+            {/* if not logged in don't allow access to Profile */}
             <Route exact path="/profile">
               <Profile />
-            </Route>
-            <Route exact path="/update_profile">
-              <UpdateProfile />
             </Route>
             <Route exact path="/login">
               <Login loadUser={loadUser} />
