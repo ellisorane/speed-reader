@@ -66,6 +66,9 @@ const readingSlice = createSlice({
         clearAllText(state) {
             state.text = '';
             state.isThereText = false;
+        },
+        zero(state) {
+            state.wordIndex = 0;
         }
 
     }

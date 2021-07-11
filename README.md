@@ -1,5 +1,5 @@
 ## `npm run dev`
-Runs both the sever-side and client-side code  in development mode.
+Runs both the sever-side and client-side code in development mode.
 
 ## Instructions:
 - Copy text into the text area, select the reading speed and hit the "Start Reading" button.
