@@ -1,7 +1,7 @@
 .container {
     background: rgb(246, 246, 255);
     padding: 15px 30px;
-    margin: 90px 0;
+    margin-top: 90px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -55,7 +55,7 @@
     
     .container {
         width: 70%;
-        margin: auto;
+        margin: 50px auto;
         padding: 100px;
         border-radius: 10px;
         box-shadow: 5px 20px 18px rgb(191, 191, 231);
