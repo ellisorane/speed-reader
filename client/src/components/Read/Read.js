@@ -126,7 +126,6 @@ const Read = () => {
             setStatus('paused');
             dispatch(readingActions.zero());
             clearInterval(timer);
-            // console.log("Stopped loop due to wordIndex being higher than array length.");
             
         }
 
@@ -137,19 +136,17 @@ const Read = () => {
         if (status === 'paused') {
             
             setTimer(clearInterval(timer));
-            // console.log("Stopped loop due to pause.");
             
         }
-
+        
         // Pause application if user goes to another page
         return () => {
-            if (window.location.href !== 'http://localhost:3000/reading') {
+            if (window.location.pathname !== '/reading') {
                 setTimer(clearInterval(timer));
-                // console.log("Stopped loop due to going to another page.");
             }
         }
         
-    }, [status, timer]);
+    }, [ status, timer]);
 
     if (!textArray || textArray.length < 1) {
         return <Redirect exact to="/" />
