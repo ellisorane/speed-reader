@@ -19,7 +19,7 @@ nav {
 
 .navLinksUl {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 45%;
 }
 
@@ -64,6 +64,7 @@ nav {
     }
 
     nav {
+        top: 0;
         position: fixed;
         z-index: 100;
     }
@@ -78,9 +79,14 @@ nav {
         top: 8vh;
         background-color: var(--nav-bg-color);
         flex-direction: column;
+        justify-content: start;
         align-items: center;
         transform: translateX(100%);
         transition: all 0.5s ease-in;
+    }
+
+    .navLinksUl li {
+        margin: 50px 0;
     }
 
     .burger {
