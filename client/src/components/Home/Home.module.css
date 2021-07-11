@@ -37,6 +37,10 @@ main {
     outline: none;
 }
 
+.error {
+    color: rgb(211, 24, 24);
+}
+
 .btn {
     font-size: 15px;
     margin-bottom: 10px;

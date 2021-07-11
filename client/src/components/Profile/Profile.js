@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 
 import Spinner from '../Spinner/Spinner';
 import { textsActions } from '../../store/texts';
+import { authActions } from '../../store/auth';
 import { readingActions } from '../../store/reading';
 
 import classes from './Profile.module.css';
@@ -51,6 +52,22 @@ const Profile = () => {
         }
     }
 
+    const deleteAccountHandler = async (userId) => {
+        const deletePrompt = prompt("Are you sure you want to delete your account? Type \"Delete\" into the text area to confirm.");
+
+        if (deletePrompt === 'Delete') {
+            try {
+                await axios.delete(`/api/user/${userId}`);
+                dispatch(authActions.noAuth());
+                dispatch(readingActions.clearAllText());
+                history.push('/');
+                alert("Account successfully deleted");
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+
     useEffect(() => {
         !loading && getSavedTextsHandler();
     }, [loading]);
@@ -61,6 +78,7 @@ const Profile = () => {
                 <div className={classes.container}>
                     {/* Username  */}
                     <h1>{user.email.toString().split('@')[0]}</h1>
+                    <button className={classes.deleteBtn} onClick={() => deleteAccountHandler(user._id)}>Delete Account</button>
                     <div className={classes.savedTexts}>
                         <h2>Saved Texts</h2>
                         {!loadingTexts ?

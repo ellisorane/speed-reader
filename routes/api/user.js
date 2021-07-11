@@ -8,6 +8,7 @@ const { check, validationResult } = require('express-validator');
 
 const auth = require('../../middleware/auth');
 const User = require('../../models/User');
+const Texts = require('../../models/Texts');
 
 
 // @route   POST /api/user
@@ -114,7 +115,7 @@ router.delete('/:user_id', auth, async (req, res) => {
     try {
         //Must remove in this order
         //Remove texts
-        // await Texts.deleteMany({ user: req.user.id });
+        await Texts.deleteMany({ user: req.user.id });
         //Remove user
         await User.findOneAndRemove({ user: req.id });
 

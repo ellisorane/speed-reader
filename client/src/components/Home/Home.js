@@ -12,6 +12,7 @@ const Input = () => {
     const text = useSelector(state => state.reading.text);
     const title = useSelector(state => state.reading.title);
     const isThereText = useSelector(state => state.reading.isThereText);
+    const errorState = useSelector(state => state.reading.error);
 
     const dispatch = useDispatch();
 
@@ -56,11 +57,12 @@ const Input = () => {
             <div className={classes.copyTextArea}>
                 
                 <h2>{title ? title : 'Paste copied text here'}</h2>
+                <p className={classes.error}>{errorState && errorState}</p>
                 <textarea name="" className={classes.copyText} onChange={addTextHandler} rows="20" value={text}></textarea>
                 <br />
                 <select onChange={setreadingSpeedHandler} className={classes.readingSpeed}>
                     <option value="250">240 wpm - Novice</option>
-                    <option value="166">400 wpm - Expert</option>
+                    <option value="166">400 wpm - Advanced</option>
                     <option value="62">1000 wpm - Reading God</option>
                 </select>
                 <br />
