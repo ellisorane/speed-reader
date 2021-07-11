@@ -50,7 +50,7 @@ input {
 @media (min-width: 768px) {
     .container {
         width: 70%;
-        margin: 50px auto;
+        /* margin: 50px auto; */
         padding: 100px;
         border-radius: 10px;
         box-shadow: 5px 20px 18px rgb(191, 191, 231);
