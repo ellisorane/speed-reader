@@ -58,7 +58,6 @@ const Login = ({ loadUser }) => {
                         <input type="email" name="email" onChange={e => dataOnChangeHandler(e)} required /> <br />
                         <label htmlFor="">Password</label> <br />
                         <input type="password" name="password" onChange={e => dataOnChangeHandler(e)} required /> <br />
-                        <label htmlFor="">Confirm Password</label> <br />
                         <button type="submit" className={classes.btn}>Login</button> 
                         <p><NavLink to="/signup">Don't have an account? Signup</NavLink></p>
                     </form>
