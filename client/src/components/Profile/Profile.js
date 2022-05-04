@@ -77,7 +77,7 @@ const Profile = () => {
             <div>
                 <div className={classes.container}>
                     {/* Username  */}
-                    <h1>{user.email.toString().split('@')[0]}</h1>
+                    <h1>{ user.username }</h1>
                     <button className={classes.deleteBtn} onClick={() => deleteAccountHandler(user._id)}>Delete Account</button>
                     <div className={classes.savedTexts}>
                         <h2>Saved Texts</h2>

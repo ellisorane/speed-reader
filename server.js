@@ -7,12 +7,14 @@ const app = express();
 // Connect DB
 connectDB();
 
+// Allows for req.body use
 app.use(express.json({ extended: false }));
 
 // Define routes
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/user', require('./routes/api/user'));
 app.use('/api/texts', require('./routes/api/texts'));
+app.use('/api/comments', require('./routes/api/comments'));
 
 // For Heroku deploy
 // Serve static assets in production

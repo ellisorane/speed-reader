@@ -37,7 +37,7 @@ const Nav = () => {
                     <li><NavLink className={classes.navLink} exact to="/" activeClassName={classes.activeLink}>Home</NavLink></li>
                     {/* Only show 'Reading...' if reading state is true */}
                     {textSubmitted && <li><NavLink className={classes.navLink} to="/reading" activeClassName={classes.activeLink}>Reading</NavLink></li>}
-                    {/* <li><NavLink className={classes.navLink} to={"/share"} activeClassName={classes.activeLink}>Share</NavLink></li> */}
+                    <li><NavLink className={classes.navLink} to={"/share"} activeClassName={classes.activeLink}>Share</NavLink></li>
                     { loggedIn && <li><NavLink className={classes.navLink} to={"/profile"} activeClassName={classes.activeLink}>Profile</NavLink></li> }
 
                     { !loggedIn ? <li><NavLink className={classes.navLink} to={"/login"} activeClassName={classes.activeLink}>Login</NavLink></li> :

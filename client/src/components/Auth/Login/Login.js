@@ -41,8 +41,9 @@ const Login = ({ loadUser }) => {
             dispatch(authActions.authSuccess(res.data));
             loadUser();
             history.push('/profile');
-        } catch {
-            setError('Failed to sign in');
+        } catch(err) {
+            console.log(err);
+            setError('Login Failed');
         }
 
     }

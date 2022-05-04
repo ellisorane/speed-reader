@@ -15,10 +15,11 @@ const Signup = ({ loadUser }) => {
     const loading = useSelector(state => state.auth.loading);
     const [formData, setFormData] = useState({
         email: '',
+        username: '',
         password: '',
         passwordConfirm: ''
     });
-    const { email, password, passwordConfirm } = formData;
+    const { email, username, password, passwordConfirm } = formData;
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -33,7 +34,7 @@ const Signup = ({ loadUser }) => {
             }
         }
 
-        const body = JSON.stringify({ email, password });
+        const body = JSON.stringify({ email, username, password });
         
         if (password !== passwordConfirm) {
             return setError("Passwords don't match");
@@ -51,10 +52,8 @@ const Signup = ({ loadUser }) => {
         } catch(err) {
             const errors = err.response.data.errors;
 
-            if (errors) {
-                console.error(errors);
-            }
-            setError('Failed to create account');
+            console.error(errors[0].msg);
+            setError(errors[0].msg);
         }
 
     }
@@ -67,6 +66,8 @@ const Signup = ({ loadUser }) => {
                         <h1>Signup</h1>
                         {error && <h3 className={classes.error}>{error}</h3>}
                         <form onSubmit={signupHandler}>
+                            <label htmlFor="">Username</label> <br />
+                            <input type="text" name="username" onChange={e => dataOnChangeHandler(e)} required /> <br />
                             <label htmlFor="">Email</label> <br />
                             <input type="email" name="email" onChange={e => dataOnChangeHandler(e)} required /> <br />
                             <label htmlFor="">Password</label> <br />

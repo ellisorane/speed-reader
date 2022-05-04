@@ -61,9 +61,9 @@ const Input = () => {
                 <textarea name="" className={classes.copyText} onChange={addTextHandler} rows="20" value={text}></textarea>
                 <br />
                 <select onChange={setreadingSpeedHandler} className={classes.readingSpeed}>
-                    <option value="250">240 wpm - Novice</option>
-                    <option value="166">400 wpm - Advanced</option>
-                    <option value="62">1000 wpm - Reading God</option>
+                    <option value={250}>240 wpm - Novice</option>
+                    <option value={166}>400 wpm - Advanced</option>
+                    <option value={62}>1000 wpm - Impossible</option>
                 </select>
                 <br />
                 <NavLink className={classes.btn} exact to={isThereText ? "/reading" : "/"} onClick={textSubmittedHandler}>Start Reading</NavLink>

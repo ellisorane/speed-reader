@@ -3,7 +3,8 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding-top: 50px;
+  /* align-items: center; */
 }
 
 .lds-spinner {

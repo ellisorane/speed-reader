@@ -31,7 +31,7 @@ router.post(
         check('password', 'Password required').exists(),
         
     ],
-    async (req, res) => {
+    async (req, res) => { 
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
@@ -65,7 +65,7 @@ router.post(
             jwt.sign(
                 payload,
                 config.get('jwtSecret'),
-                { expiresIn: 36000 },
+                { expiresIn: 360000 },
                 (err, token) => {
                     if (err) throw err;
                     res.json({ token });

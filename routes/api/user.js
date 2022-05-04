@@ -11,6 +11,23 @@ const User = require('../../models/User');
 const Texts = require('../../models/Texts');
 
 
+
+// @route   GET /api/user
+// @desc    Get all users route
+// @access  Public
+router.get('/', async (req, res) => {
+    try {
+        const user = await User.find().select('-password');
+
+        res.json(user);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error')
+    }   
+});
+
+
 // @route   POST /api/user
 // @desc    Sign up user
 // @access  Public
@@ -28,15 +45,20 @@ router.post(
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const { email, password } = req.body;
+        const { email, username, password } = req.body;
 
         try {
             // Search for user by email
-            let user = await User.findOne({ email });
+            let userE = await User.findOne({ email });
+            let userN = await User.findOne({ username })
 
             // Check if user email already exists
-            if (user) {
-                return res.status(400).json({ errors: [{ msg: 'User already exists' }] });
+            if (userE) {
+                return res.status(400).json({ errors: [{ msg: 'Email already in use' }] });
+            }
+
+            if (userN) {
+                return res.status(400).json({ errors: [{ msg: 'Username already exists' }] });
             }
 
             // Get gravatar
@@ -50,7 +72,7 @@ router.post(
             })
 
             user = new User({
-                email, avatar, password
+                email, username, avatar, password
             })
 
             // Encrypt pwd
@@ -58,9 +80,11 @@ router.post(
 
             user.password = await bcrypt.hash(password, salt);
 
+            // Save user in the DB
             await user.save();
 
             // Return jsonwebtoken
+            // Set payload to id from mongoDb users
             const payload = {
                 user: {
                     id: user.id

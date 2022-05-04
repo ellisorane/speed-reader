@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   BrowserRouter as Router,
@@ -46,6 +46,7 @@ function App() {
 
   return (
       <Router>
+        <React.StrictMode>
         <div>
           <Nav />
           <Switch>
@@ -71,6 +72,8 @@ function App() {
 
           </Switch>
         </div>
+        </React.StrictMode>
+
       </Router>
 
     

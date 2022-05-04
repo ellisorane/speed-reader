@@ -15,7 +15,7 @@
     justify-content: center;
 }
 
-.btn {
+.btn, .submitComment {
     outline: none;
     border: none;
     margin: 5px;
@@ -27,8 +27,68 @@
     border-radius: 5px;
 }
 
-.btn:hover {
+.submitComment {
+    width: fit-content;
+}
+
+.btn:hover, .submitComment:hover {
     background-color: rgb(54, 54, 219);
+}
+
+
+/* Comment CSS */
+.singleComment {
+    margin: 15px 0;
+    background: rgb(246, 246, 255);
+    box-shadow: 5px 20px 18px rgb(191, 191, 231);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.commentUserInfo {
+    display: flex;
+}
+
+.commentUserInfo img {
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    margin-right: 10px;
+}
+
+
+
+.commentUser {
+    display: flex;
+    justify-content: space-between;
+}
+
+.commentBtn {
+    outline: none;
+    border: none;
+    margin: 5px;
+    background-color: rgb(34, 34, 136);
+    padding: 5px 10px;
+    /* font-size: 20px; */
+    color: white;
+    transition: all 0.3s;
+    border-radius: 5px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.commentBtn:disabled {
+    color: rgb(0, 0, 0);
+    background-color: rgb(101, 200, 68);
+
+}
+
+.replyForm {
+    margin: 20px 0;
+}
+
+.singleReply {
+    margin-left: 50px;
 }
 
 @media (min-width: 678px ) {
