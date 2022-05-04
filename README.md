@@ -6,3 +6,4 @@ Runs both the sever-side and client-side code in development mode.
 - Once you get to the reading page you can use on screen buttons to navigate the text.
 - Alternatively you can use the arrow keys and Enter button for text navigation as well.
 - Create an account if you want to save your texts.
+- Share your experience by leaving comments on the Share page

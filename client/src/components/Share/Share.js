@@ -109,7 +109,7 @@ const Share = () => {
             // Get all user data before trying to load the comments
             await getAllUsers();
             const res = await axios.get('/api/comments');
-            setCommentData(res.data.reverse());
+            setCommentData(res.data);
         } catch(err) {
             console.log(err);
         }

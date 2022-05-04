@@ -67,8 +67,8 @@ const SingleComment = ({ comment, commentData, allUserData, currentUser, onChang
                     { <AiFillLike /> ||'Like'} { comment.likes.length }
                 </button>
 
-                {/* Reply button  */}
-                <button onClick={() => showHideReplyInput()} className={classes.commentBtn}>Reply</button>
+                {/* Reply button - Maybe  */}
+                {/* <button onClick={() => showHideReplyInput()} className={classes.commentBtn}>Reply</button> */}
             </div>
 
             <hr />
