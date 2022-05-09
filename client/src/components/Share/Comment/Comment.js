@@ -10,6 +10,7 @@ const SingleComment = ({ formData, editComment, comment, commentData, allUserDat
 
     let pic;
     let username;
+    let avatar;
 
     // Create a function that assign the correct username and profile picture to each comment
     const matchIds = async() => {
@@ -18,6 +19,7 @@ const SingleComment = ({ formData, editComment, comment, commentData, allUserDat
             if(uData._id === comment.user) {
                 pic = uData.avatar;
                 username = uData.username;
+                avatar = uData.avatar;
             }
         });
     }
@@ -30,7 +32,7 @@ const SingleComment = ({ formData, editComment, comment, commentData, allUserDat
 
                 <div className={classes.commentUserInfo}>
                     {/* User Profile Picture  */}
-                    <img src={ pic } alt="User profile pic" />
+                    <img src={ require(`../../../imgs/avatars/${avatar}`).default } alt="User profile pic" />
                     {/* Username */}
                     <p><strong>{ username || 'Anon' }</strong></p>
                     

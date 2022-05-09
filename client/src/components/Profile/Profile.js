@@ -20,9 +20,7 @@ const Profile = () => {
     const [showHide, setShowHide] = useState(false);
 
     const [avatar, setAvatar] = useState();
-    // const [avatarImg, setAvatarImg] = useState();
     // let profileImg = require(`../../imgs/avatars/${user.avatar}`).default;
-    // const profileImg = require('../../imgs/avatars/default.jpg').default;
     
     const dispatch = useDispatch();
     const history = useHistory();
