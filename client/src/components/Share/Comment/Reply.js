@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 
 import classes from '../Share.module.css';
 
-const Reply = ({ reply, allUserData, currentUser, deleteComment, likeComment }) => {
+const Reply = ({ formData, editComment, reply, allUserData, currentUser, deleteComment, likeComment, activeInputFieldID, onChangeFormData, showHideEditField }) => {
     
     let pic;
     let username;
@@ -27,17 +27,17 @@ const Reply = ({ reply, allUserData, currentUser, deleteComment, likeComment }) 
             <div className={classes.commentUser}>
 
                 <div className={classes.commentUserInfo}>
-                    {/* <img src={ userData.map(el => el._id === reply.user && el.avatar)  } alt="User Pic" /> */}
-                    <img src={ pic } alt="User Pic" />
-                    {/* <p><strong>{ userData.map(el => el._id === reply.user ? el.username : 'Anonymous user')  }</strong></p> */}
+                    {/* User Profile Picture  */}
+                    <img src={ pic } alt="User profile pic" />
+                    {/* Username */}
                     <p><strong>{ username }</strong></p>
                 </div>
 
-                {/* This will only show if you are the person that left the comment */}
+                {/* This will only be displayed if you are the person that left the comment */}
                 {
                     currentUser && currentUser._id === reply.user ? 
                     <div className={classes.userActions}>
-                        <button className={classes.commentBtn}>{ <RiEdit2Line /> || 'Edit' }</button>
+                        <button onClick={ () => showHideEditField(reply, 'edit') } className={classes.commentBtn}>{ <RiEdit2Line /> || 'Edit' }</button>
                         <button onClick={ () => deleteComment(reply._id) } className={classes.commentBtn}>{ <RiDeleteBin2Line /> || 'Delete'}</button>
                     </div> 
                     : null
@@ -48,9 +48,15 @@ const Reply = ({ reply, allUserData, currentUser, deleteComment, likeComment }) 
             {/* Date */}
             <p>Posted: { format(new Date(reply.date), 'MM-dd-yy') }</p>
 
-
-            {/* Comment */}
-            <p>{ reply.comment }</p>
+            {/* Comment/Edit */}
+            {/* If activeInputFieldID = { id: reply._id, action: 'edit' } then show the edit field, else show the comment */}
+            { activeInputFieldID.id === reply._id && activeInputFieldID.action === 'edit' ?
+                <form className={classes.editForm} onSubmit={(e) => editComment(e, reply._id) }>
+                    <input type='text' name="edit" required={ true } value={ formData.edit } onChange={ (e) => onChangeFormData(e) } />
+                    <input type='submit' value="Submit" className={classes.commentBtn} />
+                </form>
+                : <p>{ reply.comment }</p>
+            }        
 
             <div className={classes.commentActions}>
                 {/* Like Comment  */}
@@ -60,9 +66,9 @@ const Reply = ({ reply, allUserData, currentUser, deleteComment, likeComment }) 
                 // disable comment if user already liked it
                 disabled={ currentUser && reply.likes.includes(currentUser._id) }
                 >
-
                     { <AiFillLike /> ||'Like'} { reply.likes.length }
                 </button>
+                
             </div>
 
         </div>

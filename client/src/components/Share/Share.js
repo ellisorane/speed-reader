@@ -12,15 +12,23 @@ const Share = () => {
 
     const [formData, setFormData] = useState({
         comment: '',
-        reply: ''
+        reply: '',
+        edit: ''
     });
-    const { comment, reply } = formData;
+    const { comment, reply, edit } = formData;
     const [commentData, setCommentData] = useState();
     const [allUserData, setAllUserData] = useState();
     const currentUser = useSelector(state => state.auth.user);
+    const [activeInputFieldID, setActiveInputFieldID] = useState({ id: '', action: '' });
 
     const onChangeFormData = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
     
+    // Show/hide input fields 
+    const showHideEditField = (element, action) => {
+        setActiveInputFieldID({ id: element._id, action: action });
+        if(action === 'edit') setFormData({ ...formData, edit: element.comment });
+    }
+
     // Post comment
     const postComment = async(e) => {
         e.preventDefault();
@@ -35,7 +43,7 @@ const Share = () => {
         try {
             const res = await axios.post('/api/comments', body, config);
             // console.log(res);
-            setFormData({ reply: '', comment: '' });
+            setFormData({ ...formData, comment: '' });
             loadComments();
         } catch(err) {
             console.log(err);
@@ -45,7 +53,7 @@ const Share = () => {
 
     // Reply to Comment
     const replyToComment = async(e, id) => {
-        // e.preventDefault();
+        e.preventDefault();
 
         const config = {
             headers: {
@@ -58,11 +66,35 @@ const Share = () => {
         try {
             const res = await axios.post('/api/comments/' + id, body, config);
             // console.log(res);
+            setFormData({ ...formData, reply: '' });
             loadComments();
         } catch(err) {
             console.log(err);
         }
 
+    }
+
+    // Edit Comment
+    const editComment = async(e, id) => {
+        e.preventDefault();
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const body = JSON.stringify({ edit });
+
+        try {
+            const res = await axios.post('/api/comments/edit/' + id, body, config);
+            console.log(res);
+            setActiveInputFieldID({ id: '', action: '' })
+            setFormData({ ...formData, edit: '' });
+            loadComments();
+        } catch(err) {
+            console.log(err);
+        }
     }
 
     // Like Comment 
@@ -151,6 +183,10 @@ const Share = () => {
                             replyToComment={ replyToComment } 
                             deleteComment={ deleteComment }
                             likeComment={ likeComment }
+                            showHideEditField={ showHideEditField }
+                            activeInputFieldID={ activeInputFieldID }
+                            editComment={ editComment }
+                            formData={ formData }
                             key={ comment._id } 
                         /> 
                     )

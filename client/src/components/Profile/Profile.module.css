@@ -8,6 +8,19 @@
     align-items: center;
 }
 
+
+.userPhoto {
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+}
+
+.uploadAvatar {
+    border: none;
+    width: fit-content;
+}
+
 .savedTexts {
     margin-top: 20px;
 }
@@ -30,6 +43,7 @@
     color: rgb(0, 0, 0);
     transition: all 0.3s;
     border-radius: 5px;
+    
 }
 
 .btn:hover {

@@ -6,14 +6,10 @@ import Reply from './Reply';
 
 import classes from '../Share.module.css';
 
-const SingleComment = ({ comment, commentData, allUserData, currentUser, onChangeFormData, replyToComment, deleteComment, likeComment }) => {
+const SingleComment = ({ formData, editComment, comment, commentData, allUserData, currentUser, onChangeFormData, replyToComment, deleteComment, likeComment, showHideEditField, activeInputFieldID }) => {
 
     let pic;
     let username;
-
-    const showHideReplyInput = () => {
-
-    }
 
     // Create a function that assign the correct username and profile picture to each comment
     const matchIds = async() => {
@@ -33,7 +29,9 @@ const SingleComment = ({ comment, commentData, allUserData, currentUser, onChang
             <div className={classes.commentUser}>
 
                 <div className={classes.commentUserInfo}>
+                    {/* User Profile Picture  */}
                     <img src={ pic } alt="User profile pic" />
+                    {/* Username */}
                     <p><strong>{ username || 'Anon' }</strong></p>
                     
                 </div>
@@ -42,7 +40,9 @@ const SingleComment = ({ comment, commentData, allUserData, currentUser, onChang
                 {
                     currentUser && currentUser._id === comment.user ? 
                     <div className={classes.userActions}>
-                        <button className={classes.commentBtn}>{ <RiEdit2Line /> || 'Edit' }</button>
+                        {/* Edit Button  */}
+                        <button onClick={ () => showHideEditField(comment, 'edit') } className={classes.commentBtn}>{ <RiEdit2Line /> || 'Edit' }</button>
+                        {/* Delete Button  */}
                         <button onClick={ () => deleteComment(comment._id) } className={classes.commentBtn}>{ <RiDeleteBin2Line /> || 'Delete'}</button>
                     </div> 
                     : null
@@ -53,8 +53,15 @@ const SingleComment = ({ comment, commentData, allUserData, currentUser, onChang
             {/* Date */}
             <p>Posted: { format(new Date(comment.date), 'MM-dd-yy') }</p>
             
-            {/* Comment */}
-            <p>{ comment.comment }</p>
+            {/* Comment/Edit */}
+            {/* If activeInputFieldID === { id: comment._id, action: 'edit' } then show the edit field, else show the comment */}
+            { activeInputFieldID.id === comment._id && activeInputFieldID.action === 'edit' ?
+                <form className={classes.editForm} onSubmit={(e) => editComment(e, comment._id) }>
+                    <input type='text' name="edit" required={ true } value={ formData.edit } onChange={ (e) => onChangeFormData(e) } />
+                    <input type='submit' value="Submit" className={classes.commentBtn} />
+                </form>
+                : <p>{ comment.comment }</p>
+            }           
 
             <div className={classes.commentActions}>
                 {/* Like comment */}
@@ -67,9 +74,17 @@ const SingleComment = ({ comment, commentData, allUserData, currentUser, onChang
                     { <AiFillLike /> ||'Like'} { comment.likes.length }
                 </button>
 
-                {/* Reply button - Maybe  */}
-                {/* <button onClick={() => showHideReplyInput()} className={classes.commentBtn}>Reply</button> */}
+                {/* Reply button */}
+                <button onClick={ () => showHideEditField(comment, 'reply') } className={classes.commentBtn}>Reply</button>
             </div>
+
+                {/* Reply Field  */}
+                {/* If activeInputFieldID = { id: comment._id, action: 'reply' } then show the reply field, else show nothing */}
+                { (activeInputFieldID.id === comment._id && activeInputFieldID.action === 'reply') && 
+                <form className={classes.replyForm} onSubmit={(e) => replyToComment(e, comment._id)}>
+                    <input type='text' name="reply" value={ FormData.reply } required={ true } onChange={ (e) => onChangeFormData(e) } />
+                    <input type='submit' value="Leave reply" className={classes.commentBtn} />
+                </form>}
 
             <hr />
 
@@ -84,17 +99,17 @@ const SingleComment = ({ comment, commentData, allUserData, currentUser, onChang
                     currentUser={ currentUser } 
                     deleteComment= { deleteComment }
                     likeComment={ likeComment }
+                    onChangeFormData={ onChangeFormData }
+                    activeInputFieldID={ activeInputFieldID }
+                    showHideEditField={ showHideEditField }
+                    editComment={ editComment }
+                    formData={ formData }
                     key={reply._id} 
                 /> ) 
                 : <h2>Loading...</h2> }
                 
             </div>
 
-            {/* Reply input  */}
-            <form className={classes.replyForm} onSubmit={(e) => replyToComment(e, comment._id)}>
-                <input type='text' name="reply" required={ true } onChange={ (e) => onChangeFormData(e) } />
-                <input type='submit' value="Leave reply" className={classes.commentBtn} />
-            </form>
             
         </div>
     );

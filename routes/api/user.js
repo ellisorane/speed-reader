@@ -1,14 +1,52 @@
 const express = require('express');
 const router = express.Router();
-const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
 
+const multer = require('multer');
+const multerStorage = multer.diskStorage({ 
+    destination: (req, file, cb) => {
+        cb(null, 'client/src/imgs/avatars');
+    },
+    filename: (req, file, cb) => {
+        const ext = file.mimetype.split('/')[1];
+        cb(null, `user-${req.user.id}-${Date.now()}.${ext}`)
+    }
+});
+const multerFilter = (req, file, cb) => {
+    if (file.mimetype.startsWith("image")) {
+        cb(null, true);
+    } else {
+        return cb(new Error('Only images allowed!', 400), false);
+    }
+}
+const upload = multer({ storage: multerStorage, fileFilter: multerFilter });
+
+
 const auth = require('../../middleware/auth');
 const User = require('../../models/User');
 const Texts = require('../../models/Texts');
+const Comments = require('../../models/Comment');
+
+// @route   POST /api/user/avatar/
+// @desc    Upload/update avatar 
+// @access  Private
+router.post('/avatar', [ auth, upload.single('avatar') ], async(req, res) => {
+    // console.log(req.body);
+    console.log(req.file);
+    try {
+        const user = await User.updateOne( { _id: req.user.id }, { $set: { avatar: req.file.filename } } );
+        res.json(user);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+});
+
+
 
 
 
@@ -61,18 +99,8 @@ router.post(
                 return res.status(400).json({ errors: [{ msg: 'Username already exists' }] });
             }
 
-            // Get gravatar
-            const avatar = gravatar.url(email, {
-                // string length max
-                s: '200',
-                // Rating
-                r: 'pg',
-                // Default gravatar
-                d: 'mm'
-            })
-
             user = new User({
-                email, username, avatar, password
+                email, username, password
             })
 
             // Encrypt pwd
@@ -140,8 +168,10 @@ router.delete('/:user_id', auth, async (req, res) => {
         //Must remove in this order
         //Remove texts
         await Texts.deleteMany({ user: req.user.id });
+        //Remove comments
+        await Comments.deleteMany({ user: req.user.id });
         //Remove user
-        await User.findOneAndRemove({ user: req.id });
+        await User.deleteOne({ _id: req.user.id });
 
         res.json({ msg: 'User deleted' });
 
