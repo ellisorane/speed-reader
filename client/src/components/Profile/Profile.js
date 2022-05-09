@@ -87,8 +87,8 @@ const Profile = () => {
 
         try {
             const res = await axios.post('/api/user/avatar', data);
-            // window.location.reload(false);
-            console.log(res);
+            // reload page to update image
+            window.location.reload(false);
         } catch(err) {
             console.log(err);
         }
@@ -120,7 +120,7 @@ const Profile = () => {
                     <h1>{ user.username }</h1>
                     <button className={classes.deleteBtn} onClick={() => deleteAccountHandler(user._id)}>Delete Account</button>
                     <div className={classes.savedTexts}>
-                        <h2>Saved Texts</h2>
+                        <h2><u>Saved Texts</u></h2>
                         {!loadingTexts ?
                             savedTexts.map(text => 
                                 <div className={classes.btnContainer} key={text._id}>
