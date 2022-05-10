@@ -6,15 +6,17 @@ import classes from '../Share.module.css';
 
 const Reply = ({ formData, editComment, reply, allUserData, currentUser, deleteComment, likeComment, activeInputFieldID, onChangeFormData, showHideEditField }) => {
     
-    let pic;
     let username;
+    let avatar;
+
 
     const matchIds = async() => {
         
         await allUserData.forEach(uData => {
             if(uData._id === reply.user) {
-                pic = uData.avatar;
                 username = uData.username;
+                avatar = uData.avatar;
+
             }
         });
     }
@@ -28,7 +30,7 @@ const Reply = ({ formData, editComment, reply, allUserData, currentUser, deleteC
 
                 <div className={classes.commentUserInfo}>
                     {/* User Profile Picture  */}
-                    <img src={ pic } alt="User profile pic" />
+                    <img src={ require(`../../../imgs/avatars/${avatar}`).default } alt="User profile pic" />
                     {/* Username */}
                     <p><strong>{ username }</strong></p>
                 </div>

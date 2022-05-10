@@ -8,7 +8,6 @@ import classes from '../Share.module.css';
 
 const SingleComment = ({ formData, editComment, comment, commentData, allUserData, currentUser, onChangeFormData, replyToComment, deleteComment, likeComment, showHideEditField, activeInputFieldID }) => {
 
-    let pic;
     let username;
     let avatar;
 
@@ -17,7 +16,6 @@ const SingleComment = ({ formData, editComment, comment, commentData, allUserDat
         
         await allUserData.forEach(uData => {
             if(uData._id === comment.user) {
-                pic = uData.avatar;
                 username = uData.username;
                 avatar = uData.avatar;
             }
