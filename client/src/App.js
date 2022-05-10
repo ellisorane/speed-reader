@@ -46,7 +46,6 @@ function App() {
 
   return (
       <Router>
-        <React.StrictMode>
         <div>
           <Nav />
           <Switch>
@@ -72,7 +71,6 @@ function App() {
 
           </Switch>
         </div>
-        </React.StrictMode>
 
       </Router>
 
