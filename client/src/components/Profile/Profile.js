@@ -105,15 +105,15 @@ const Profile = () => {
                     {/* Display Profile Picture  */}
                     { user && <img className={classes.userPhoto} src={ require(`../../imgs/avatars/${user.avatar}`).default } alt="User profile pic" /> }
                     
-                    {/* Upload user photo */}
-                    <button className={classes.btn} onClick={ () => setShowHide(!showHide) }>Change Profile pic</button>
+                    {/* Upload user photo - Disabled until I figure out how to make it work on the live website */}
+                    {/* <button className={classes.btn} onClick={ () => setShowHide(!showHide) }>Change Profile pic</button>
                     { 
                         showHide &&
                         <form onSubmit={ (e) => submitAvatar(e) }>
                             <input type='file' className={classes.uploadAvatar} name='avatar' onChange={ (e) => changeAvFile(e) } accept="images/*" />
                             <input type="submit" />
                         </form>
-                    }
+                    } */}
                     {/* Username  */}
                     <h1>{ user.username }</h1>
                     <button className={classes.deleteBtn} onClick={() => deleteAccountHandler(user._id)}>Delete Account</button>
