@@ -30,7 +30,7 @@ const SingleComment = ({ formData, editComment, comment, commentData, allUserDat
 
                 <div className={classes.commentUserInfo}>
                     {/* User Profile Picture  */}
-                    <img src={ require(`../../../imgs/avatars/${avatar}`).default } alt="User profile pic" />
+                    <img src={ `/uploads/${avatar}` } alt="User profile pic" />
                     {/* Username */}
                     <p><strong>{ username || 'Anon' }</strong></p>
                     

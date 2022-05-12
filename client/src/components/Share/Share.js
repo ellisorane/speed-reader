@@ -158,7 +158,7 @@ const Share = () => {
             <div className={classes.container}>
                 <h2 className={classes.pageTitle}>Share your experience</h2>
                 <div className={classes.info}>
-                    <p>Did you find this application useful? How has the app helped with your reading speed and comprehension? You can share your experience and or feedback on this page. </p>
+                    <p>Did you find this application useful? How has the app helped with your reading speed and comprehension? You can share your experience and or feedback below. </p>
                 </div>
 
                 <div className={classes.commentContainer}>

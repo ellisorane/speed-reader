@@ -8,7 +8,7 @@ const { check, validationResult } = require('express-validator');
 const multer = require('multer');
 const multerStorage = multer.diskStorage({ 
     destination: (req, file, cb) => {
-        cb(null, 'client/src/imgs/avatars');
+        cb(null, 'public/uploads');
     },
     filename: (req, file, cb) => {
         const ext = file.mimetype.split('/')[1];
