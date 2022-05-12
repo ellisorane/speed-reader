@@ -10,6 +10,10 @@ connectDB();
 // Allows for req.body use
 app.use(express.json({ extended: false }));
 
+// Below are needed to access the uploaded avatar files 
+app.use('/static', express.static('public'));
+app.use('/uploads', express.static('public/uploads'));
+
 // Define routes
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/user', require('./routes/api/user'));
