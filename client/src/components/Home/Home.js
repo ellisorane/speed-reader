@@ -6,6 +6,21 @@ import classes from './Home.module.css';
 
 import { readingActions } from '../../store/reading';
 
+/*
+
+WPM calculation - milliseconds to wpm
+500 milliseconds = 500/1000 = 0.50 sec
+60 sec per minute
+60/0.50 = 120 wpm
+
+
+WPM calculation - wpm to milliseconds
+120 wpm = 60/120 = 0.50 sec
+0.50 * 1000 = 500 milliseconds
+
+
+*/
+
 
 const Input = () => {
 
@@ -61,9 +76,13 @@ const Input = () => {
                 <textarea name="" className={classes.copyText} onChange={addTextHandler} rows="20" value={text}></textarea>
                 <br />
                 <select onChange={setreadingSpeedHandler} className={classes.readingSpeed}>
-                    <option value={250}>240 wpm - Novice</option>
-                    <option value={166}>400 wpm - Advanced</option>
-                    <option value={62}>1000 wpm - Impossible</option>
+                    <option value={500}>120 wpm - Learning Lvl 1</option>
+                    <option value={300}>200 wpm - Learning Lvl 2</option>
+                    <option value={240}>250 wpm - Comprehension Lvl 1</option>
+                    <option value={171}>350 wpm - Comprehension Lvl 2</option>
+                    <option value={133}>450 wpm - Speed Reader Lvl 1</option>
+                    <option value={105}>570 wpm - Speed Reader Lvl 2</option>
+                    <option value={92}>650 wpm - Speed Reader Lvl 3</option>
                 </select>
                 <br />
                 <NavLink className={classes.btn} exact to={isThereText ? "/reading" : "/"} onClick={textSubmittedHandler}>Start Reading</NavLink>
