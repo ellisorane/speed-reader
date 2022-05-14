@@ -11,7 +11,7 @@ import { readingActions } from '../../store/reading';
 
 import classes from './Profile.module.css';
 
-const Profile = ({ defaultAvatar }) => {
+const Profile = ({ defaultAvatar, loadUser }) => {
 
     const user = useSelector(state => state.auth.user);
     const loading = useSelector(state => state.auth.loading);
@@ -85,8 +85,9 @@ const Profile = ({ defaultAvatar }) => {
 
         try {
             const res = await axios.post('/api/user/avatar', data);
+            loadUser();
             // reload page to update image
-            window.location.reload(false);
+            // window.location.reload(false);
         } catch(err) {
             console.log(err);
         }

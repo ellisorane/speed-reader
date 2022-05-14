@@ -62,11 +62,11 @@ function App() {
               <Read />
             </Route>
             <Route exact path="/share">
-              <Share defaultAvatar={ defaultAvatar } />
+              <Share defaultAvatar={ defaultAvatar } loadUser={ loadUser } />
             </Route>
             {/* if not logged in don't allow access to Profile */}
             <Route exact path="/profile">
-              <Profile defaultAvatar={ defaultAvatar } />
+              <Profile defaultAvatar={ defaultAvatar } loadUser={ loadUser } />
             </Route>
             <Route exact path="/login">
               <Login loadUser={loadUser} />

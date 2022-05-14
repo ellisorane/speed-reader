@@ -8,7 +8,7 @@ import { authActions } from '../../store/auth';
 
 import classes from './Share.module.css';
 
-const Share = ({ defaultAvatar }) => {
+const Share = ({ defaultAvatar, loadUser }) => {
 
     const [formData, setFormData] = useState({
         comment: '',
