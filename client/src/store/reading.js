@@ -2,10 +2,20 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialReadingState = {
     title: '',
-    text: "Dolphins are regarded as the friendliest creatures in the sea and stories of them helping drowning sailors have been common since Roman times. The more we learn about dolphins, the more we realize that their society is more complex than people previously imagined. They look after other dolphins when they are ill, care for pregnant mothers and protect the weakest in the community, as we do. Some scientists have suggested that dolphins have a language but it is much more probable that they communicate with each other without needing words. Could any of these mammals be more intelligent than man? Certainly the most common argument in favor of man's superiority over them that we can kill them more easily than they can kill us is the least satisfactory. On the contrary, the more we discover about these remarkable creatures, the less we appear superior when we destroy them.",
+    text: `Effective speed reading is a balance between pace and comprehension. Studies have found that the faster you read, the less information you take in, particularly when it comes to remembering detail.
+
+            So, speed reading is clearly not the answer if you're reading a complex legal or technical document, even if you are pushed for time. Similarly, it would be sensible to slow down if the material you're reading is new or unfamiliar, or if you have to teach it to someone else.
+
+            When you need to understand only the basic arguments or conclusions being presented, though, using a speed reading technique can work.
+
+            This may especially be the case if you intend to go back and re-read something more slowly when you're less busy. In fact, one study has suggested that skimming a text can improve your comprehension the second time around.
+
+            Generally speaking, if you want to memorize something, you'll need to read slowly, at less than 100 wpm. A normal rate for learning is 100-200 wpm, and for comprehension it is 200-400 wpm.
+
+            Speed reading is normally done at a rate of around 400-700 wpm. Anything above 500-600 wpm means sacrificing comprehension, although this varies from person to person.`,
     textArray: [],
     error: '',
-    readingSpeed: 250,
+    readingSpeed: 500,
     isThereText: true,
     textSubmitted: false,
     wordIndex: 0,

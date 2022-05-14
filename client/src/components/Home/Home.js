@@ -47,7 +47,7 @@ const Input = () => {
 
     // Reset readingSpeed to 555 upon visiting the home page
     useEffect(() => {
-        dispatch(readingActions.setreadingSpeed(250));
+        dispatch(readingActions.setreadingSpeed(500));
     })
 
     return (
@@ -62,8 +62,8 @@ const Input = () => {
                 <ul>
                     <li>Copy text into the text area, select the reading speed and hit the "Start Reading" button.</li>
                     <li>Once you get to the reading page you can use on screen buttons to navigate the text.</li>
-                    <li>Alternatively you can use the arrow keys and Enter button for text navigation as well.</li>
-                    <li>Create an account if you want to save your texts.</li>
+                    <li>Alternatively you can use the arrow and Enter keys for text navigation as well.</li>
+                    <li>Create an account if you want to save your texts or leave comments.</li>
                 </ul>
                 
             </div>

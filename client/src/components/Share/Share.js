@@ -88,7 +88,7 @@ const Share = ({ defaultAvatar }) => {
 
         try {
             const res = await axios.post('/api/comments/edit/' + id, body, config);
-            console.log(res);
+            // console.log(res);
             setActiveInputFieldID({ id: '', action: '' })
             setFormData({ ...formData, edit: '' });
             loadComments();
@@ -163,11 +163,12 @@ const Share = ({ defaultAvatar }) => {
 
                 <div className={classes.commentContainer}>
                     <h3>Comments</h3>
-                    <p>Leave a comment about your experience.</p>
-                    <form onSubmit={(e) => postComment(e)}>
+                    <p>Leave a comment about your experience. You must be logged in to leave comments.</p>
+                    
+                    {currentUser && <form onSubmit={(e) => postComment(e)}>
                         <input type="text" name="comment" required={ true } value={formData.comment} onChange={(e) => onChangeFormData(e)} />
                         <input type="submit" value="Post Comment" className={classes.submitComment} />
-                    </form>
+                    </form>}
 
                     {/* Only show comments that are not replies to other comments as main comments */}
                     { commentData ?

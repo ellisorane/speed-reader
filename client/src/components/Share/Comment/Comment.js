@@ -71,7 +71,7 @@ const SingleComment = ({ defaultAvatar, formData, editComment, comment, commentD
                 {/* Like comment */}
                 <button 
                 onClick={ () => likeComment(comment._id) } 
-                className={classes.commentBtn}
+                className={classes.likeBtn}
                 // Disable btn if comment likes array contains user ID - disable if user already liked comment
                 disabled={ currentUser && comment.likes.includes(currentUser._id) }
                 >
@@ -79,14 +79,14 @@ const SingleComment = ({ defaultAvatar, formData, editComment, comment, commentD
                 </button>
 
                 {/* Reply button */}
-                <button onClick={ () => showHideEditField(comment, 'reply') } className={classes.commentBtn}>Reply</button>
+                <button onClick={ () => showHideEditField(comment, 'reply') } className={classes.commentBtn} disabled={ !currentUser }>Reply</button>
             </div>
 
                 {/* Reply Field  */}
                 {/* If activeInputFieldID = { id: comment._id, action: 'reply' } then show the reply field, else show nothing */}
                 { (activeInputFieldID.id === comment._id && activeInputFieldID.action === 'reply') && 
                 <form className={classes.replyForm} onSubmit={(e) => replyToComment(e, comment._id)}>
-                    <input type='text' name="reply" value={ FormData.reply } required={ true } onChange={ (e) => onChangeFormData(e) } />
+                    <input type='text' name="reply" value={ formData.reply } required={ true } onChange={ (e) => onChangeFormData(e) } />
                     <input type='submit' value="Leave reply" className={classes.commentBtn} />
                 </form>}
 

@@ -1,5 +1,6 @@
 .readContainer {
     display: flex;
+    overflow-x: hidden;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -38,4 +39,10 @@
 .saveTitle {
     margin-top: 30px;
     text-align: center;
+}
+
+@media(max-width: 600px) {
+    .readContainer {
+        font-size: 20px;
+    }
 }
