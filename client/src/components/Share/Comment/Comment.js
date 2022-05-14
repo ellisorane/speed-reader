@@ -30,11 +30,11 @@ const SingleComment = ({ defaultAvatar, formData, editComment, comment, commentD
 
                 <div className={classes.commentUserInfo}>
                     {/* User Profile Picture  */}
-                    <img 
+                    {/* <img 
                     src={ `/uploads/${avatar}` } 
                     alt="User profile pic" 
                     onError={ (e) => defaultAvatar(e)  }
-                    />
+                    /> */}
                     {/* Username */}
                     <p><strong>{ username || 'Anon' }</strong></p>
                     

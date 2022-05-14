@@ -20,7 +20,6 @@ const Profile = ({ defaultAvatar, loadUser }) => {
     const [showHide, setShowHide] = useState(false);
 
     const [avatar, setAvatar] = useState();
-    // let profileImg = require(`../../imgs/avatars/${user.avatar}`).default;
     
     const dispatch = useDispatch();
     const history = useHistory();
@@ -85,9 +84,8 @@ const Profile = ({ defaultAvatar, loadUser }) => {
 
         try {
             const res = await axios.post('/api/user/avatar', data);
+            // Load updated user
             loadUser();
-            // reload page to update image
-            // window.location.reload(false);
         } catch(err) {
             console.log(err);
         }
