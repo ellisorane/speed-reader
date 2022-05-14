@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
+const fs = require('fs');
 
 const multer = require('multer');
 const multerStorage = multer.diskStorage({ 
@@ -34,15 +35,29 @@ const Comments = require('../../models/Comment');
 // @desc    Upload/update avatar 
 // @access  Private
 router.post('/avatar', [ auth, upload.single('avatar') ], async(req, res) => {
-    // console.log(req.body);
-    console.log(req.file);
+    // console.log(req.file);
     try {
+        // Get user before avatar change
+        const userBeforeChange = await User.findOne({ _id: req.user.id })
+
+        // If old avatar image is not the default image, delete it from server before replacing it with a new one 
+        if(userBeforeChange.avatar !== 'default.jpg') {
+            fs.unlink("./public/uploads/"+ userBeforeChange.avatar, (err) => {
+                if (err) {
+                    console.log("failed to delete local image: "+ err);
+                } else {
+                    console.log('successfully deleted local image');                                
+                }
+            });
+        }
+
+        // Update user
         const user = await User.updateOne( { _id: req.user.id }, { $set: { avatar: req.file.filename } } );
         res.json(user);
 
     } catch (error) {
         console.error(error);
-        res.status(500).send('Server Error');
+        res.status(500).send('Server Error uploading avatar');
     }
 });
 
@@ -54,14 +69,16 @@ router.post('/avatar', [ auth, upload.single('avatar') ], async(req, res) => {
 // @desc    Get all users route
 // @access  Public
 router.get('/', async (req, res) => {
+    
+    
     try {
-        const user = await User.find().select('-password');
+        const users = await User.find().select('-password');
 
-        res.json(user);
+        res.json(users);
 
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server Error')
+        res.status(500).send('Server Error getting all users')
     }   
 });
 
@@ -154,7 +171,7 @@ router.get('/current', auth, async (req, res) => {
 
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server Error')
+        res.status(500).send('Server Error getting current user')
     }   
 });
 

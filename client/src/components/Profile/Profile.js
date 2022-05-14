@@ -11,7 +11,7 @@ import { readingActions } from '../../store/reading';
 
 import classes from './Profile.module.css';
 
-const Profile = () => {
+const Profile = ({ defaultAvatar }) => {
 
     const user = useSelector(state => state.auth.user);
     const loading = useSelector(state => state.auth.loading);
@@ -97,15 +97,20 @@ const Profile = () => {
         !loading && getSavedTextsHandler();
     }, [loading]);
     
+    
 
     if (!loading && user) {
         return (
             <div>
                 <div className={classes.container}>
                     {/* Display Profile Picture  */}
-                    { user && <img className={classes.userPhoto} src={ `/uploads/${user.avatar}` } alt="User profile pic" /> }
-                    {/* { user && <img className={classes.userPhoto} src={ require(`/public/${user.avatar}`).default } alt="User profile pic" /> } */}
-                    
+                    { user && 
+                    <img className={classes.userPhoto} 
+                        src={ `/uploads/${user.avatar}` } 
+                        alt="User profile pic" 
+                        onError={ (e) => defaultAvatar(e)  }
+                    /> }
+
                     {/* Upload user photo - Disabled until I figure out how to make it work on the live website */}
                     <button className={classes.btn} onClick={ () => setShowHide(!showHide) }>Change Profile pic</button>
                     { 

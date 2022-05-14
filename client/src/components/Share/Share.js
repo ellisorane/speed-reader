@@ -8,7 +8,7 @@ import { authActions } from '../../store/auth';
 
 import classes from './Share.module.css';
 
-const Share = () => {
+const Share = ({ defaultAvatar }) => {
 
     const [formData, setFormData] = useState({
         comment: '',
@@ -188,6 +188,7 @@ const Share = () => {
                             editComment={ editComment }
                             formData={ formData }
                             key={ comment._id } 
+                            defaultAvatar= { defaultAvatar }
                         /> 
                     )
                     : <Spinner /> }

@@ -37,6 +37,12 @@ function App() {
       }
   }
 
+  // Show default user avatar if the uploaded one cannot be found
+  const defaultAvatar = ({currentTarget}) => {
+    currentTarget.onerror = null; // prevents looping
+    currentTarget.src="/uploads/default.jpg";
+  } 
+
   // User needs to be loaded everytime the page changes
   useEffect(() => {
     // Only load user if token is detected
@@ -56,11 +62,11 @@ function App() {
               <Read />
             </Route>
             <Route exact path="/share">
-              <Share />
+              <Share defaultAvatar={ defaultAvatar } />
             </Route>
             {/* if not logged in don't allow access to Profile */}
             <Route exact path="/profile">
-              <Profile />
+              <Profile defaultAvatar={ defaultAvatar } />
             </Route>
             <Route exact path="/login">
               <Login loadUser={loadUser} />

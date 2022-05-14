@@ -18,7 +18,6 @@ WPM calculation - wpm to milliseconds
 120 wpm = 60/120 = 0.50 sec
 0.50 * 1000 = 500 milliseconds
 
-
 */
 
 

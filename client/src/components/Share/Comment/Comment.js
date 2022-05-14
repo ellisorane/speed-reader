@@ -6,7 +6,7 @@ import Reply from './Reply';
 
 import classes from '../Share.module.css';
 
-const SingleComment = ({ formData, editComment, comment, commentData, allUserData, currentUser, onChangeFormData, replyToComment, deleteComment, likeComment, showHideEditField, activeInputFieldID }) => {
+const SingleComment = ({ defaultAvatar, formData, editComment, comment, commentData, allUserData, currentUser, onChangeFormData, replyToComment, deleteComment, likeComment, showHideEditField, activeInputFieldID }) => {
 
     let username;
     let avatar;
@@ -30,7 +30,11 @@ const SingleComment = ({ formData, editComment, comment, commentData, allUserDat
 
                 <div className={classes.commentUserInfo}>
                     {/* User Profile Picture  */}
-                    <img src={ `/uploads/${avatar}` } alt="User profile pic" />
+                    <img 
+                    src={ `/uploads/${avatar}` } 
+                    alt="User profile pic" 
+                    onError={ (e) => defaultAvatar(e)  }
+                    />
                     {/* Username */}
                     <p><strong>{ username || 'Anon' }</strong></p>
                     
@@ -105,6 +109,7 @@ const SingleComment = ({ formData, editComment, comment, commentData, allUserDat
                     editComment={ editComment }
                     formData={ formData }
                     key={reply._id} 
+                    defaultAvatar={ defaultAvatar }
                 /> ) 
                 : <h2>Loading...</h2> }
                 

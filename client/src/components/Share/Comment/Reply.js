@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 
 import classes from '../Share.module.css';
 
-const Reply = ({ formData, editComment, reply, allUserData, currentUser, deleteComment, likeComment, activeInputFieldID, onChangeFormData, showHideEditField }) => {
+const Reply = ({ defaultAvatar, formData, editComment, reply, allUserData, currentUser, deleteComment, likeComment, activeInputFieldID, onChangeFormData, showHideEditField }) => {
     
     let username;
     let avatar;
@@ -30,7 +30,11 @@ const Reply = ({ formData, editComment, reply, allUserData, currentUser, deleteC
 
                 <div className={classes.commentUserInfo}>
                     {/* User Profile Picture  */}
-                    <img src={ `/uploads/${avatar}` } alt="User profile pic" />
+                    <img 
+                    src={ `/uploads/${avatar}` } 
+                    alt="User profile pic" 
+                    onError={ (e) => defaultAvatar(e)  }
+                    />
                     {/* Username */}
                     <p><strong>{ username }</strong></p>
                 </div>
