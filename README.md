@@ -1,3 +1,6 @@
+# Speed Reader
+- Speed reader is an experimental reading application that is supposed to help increase the user's reading speed.
+
 ## `npm run dev`
 Runs both the sever-side and client-side code in development mode.
 
