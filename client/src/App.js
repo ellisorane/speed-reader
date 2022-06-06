@@ -8,15 +8,19 @@ import {
 import axios from 'axios';
 
 import Nav from './components/Nav/Nav';
-import Home from './components/Home/Home';
-import Read from './components/Read/Read';
-import Share from './components/Share/Share';
-import Profile from './components/Profile/Profile';
-import Login from './components/Auth/Login/Login';
-import Signup from './components/Auth/Signup/Signup';
 import setAuthToken from './utils/setAuthToken';
 import { authActions } from './store/auth';
+
+import Spinner from './components/Spinner/Spinner';
+
 import './App.css';
+
+const Home = React.lazy(() => import('./components/Home/Home'));
+const Read = React.lazy(() => import('./components/Read/Read'));
+const Share = React.lazy(() => import('./components/Share/Share'));
+const Profile = React.lazy(() => import('./components/Profile/Profile'));
+const Login = React.lazy(() => import('./components/Auth/Login/Login'));
+const Signup = React.lazy(() => import('./components/Auth/Signup/Signup'));
 
 function App() {
 
@@ -56,23 +60,23 @@ function App() {
           <Nav />
           <Switch>
             <Route exact path="/">
-              <Home />
+              <React.Suspense fallback={Spinner}><Home /></React.Suspense>
             </Route>
             <Route exact path="/reading">
-              <Read />
+              <React.Suspense fallback={Spinner}><Read /></React.Suspense>
             </Route>
             <Route exact path="/share">
-              <Share defaultAvatar={ defaultAvatar } />
+              <React.Suspense fallback={Spinner}><Share defaultAvatar={ defaultAvatar } /></React.Suspense>
             </Route>
             {/* if not logged in don't allow access to Profile */}
             <Route exact path="/profile">
-              <Profile defaultAvatar={ defaultAvatar } loadUser={ loadUser } />
+              <React.Suspense fallback={Spinner}><Profile defaultAvatar={ defaultAvatar } loadUser={ loadUser } /></React.Suspense>
             </Route>
             <Route exact path="/login">
-              <Login loadUser={loadUser} />
+              <React.Suspense fallback={Spinner}><Login loadUser={loadUser} /></React.Suspense>
             </Route>
             <Route exact path="/signup">
-              <Signup loadUser={loadUser} />
+              <React.Suspense fallback={Spinner}><Signup loadUser={loadUser} /></React.Suspense>
             </Route>
 
           </Switch>
