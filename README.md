@@ -2,7 +2,10 @@
 - Speed reader is an experimental reading application that is supposed to help increase the user's reading speed.
 
 ## `npm run dev`
-Runs both the sever-side and client-side code in development mode.
+- Runs both the sever-side and client-side code in development mode.
+
+## Website
+- https://speed-reader-react.herokuapp.com/
 
 ## Instructions:
 - Copy text into the text area, select the reading speed and hit the "Start Reading" button.
