@@ -59,25 +59,47 @@ function App() {
         <div>
           <Nav />
           <Switch>
-            <Route exact path="/">
-              <React.Suspense fallback={Spinner}><Home /></React.Suspense>
+            {/* <Route exact path="/">
+              <React.Suspense fallback={<Spinner />}><Home /></React.Suspense>
             </Route>
             <Route exact path="/reading">
-              <React.Suspense fallback={Spinner}><Read /></React.Suspense>
+              <React.Suspense fallback={<Spinner />}><Read /></React.Suspense>
             </Route>
             <Route exact path="/share">
-              <React.Suspense fallback={Spinner}><Share defaultAvatar={ defaultAvatar } /></React.Suspense>
+              <React.Suspense fallback={<Spinner />}><Share defaultAvatar={ defaultAvatar } /></React.Suspense>
             </Route>
-            {/* if not logged in don't allow access to Profile */}
+            if not logged in don't allow access to Profile
             <Route exact path="/profile">
-              <React.Suspense fallback={Spinner}><Profile defaultAvatar={ defaultAvatar } loadUser={ loadUser } /></React.Suspense>
+              <React.Suspense fallback={<Spinner />}><Profile defaultAvatar={ defaultAvatar } loadUser={ loadUser } /></React.Suspense>
             </Route>
             <Route exact path="/login">
-              <React.Suspense fallback={Spinner}><Login loadUser={loadUser} /></React.Suspense>
+              <React.Suspense fallback={<Spinner />}><Login loadUser={loadUser} /></React.Suspense>
             </Route>
             <Route exact path="/signup">
-              <React.Suspense fallback={Spinner}><Signup loadUser={loadUser} /></React.Suspense>
-            </Route>
+              <React.Suspense fallback={<Spinner />}><Signup loadUser={loadUser} /></React.Suspense>
+            </Route> */}
+
+            <React.Suspense fallback={<Spinner />}>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path="/reading">
+                <Read />
+              </Route>
+              <Route exact path="/share">
+                <Share defaultAvatar={ defaultAvatar } />
+              </Route>
+              {/* if not logged in don't allow access to Profile */}
+              <Route exact path="/profile">
+                <Profile defaultAvatar={ defaultAvatar } loadUser={ loadUser } />
+              </Route>
+              <Route exact path="/login">
+                <Login loadUser={loadUser} />
+              </Route>
+              <Route exact path="/signup">
+                <Signup loadUser={loadUser} />
+              </Route>
+            </React.Suspense>
 
           </Switch>
         </div>

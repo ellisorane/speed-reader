@@ -92,56 +92,7 @@ const Profile = ({ defaultAvatar, loadUser }) => {
 
     }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// AWS Functions ///////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    function fileOnchange(e) {
-        const file = e.target.files[0]
-        if(file == null){
-            return alert('No file selected.');
-        }
-        getSignedRequest(file);
-    }
-
-    function uploadFile(file, signedRequest, url) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('PUT', signedRequest);
-        xhr.onreadystatechange = () => {
-          if(xhr.readyState === 4){
-            if(xhr.status === 200){
-              document.getElementById('preview').src = url;
-              document.getElementById('avatar-url').value = url;
-            }
-            else{
-              alert('Could not upload file.');
-            }
-          }
-        };
-        xhr.send(file);
-    }
-
-    function getSignedRequest(file) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', `/sign-s3?file-name=${encodeURIComponent(file.name)}&file-type=${encodeURIComponent(file.type)}`);
-        xhr.onreadystatechange = () => {
-          if(xhr.readyState === 4){
-            if(xhr.status === 200){
-              const response = JSON.parse(xhr.responseText);
-              uploadFile(file, response.signedRequest, response.url);
-            }
-            else{
-              alert('Could not get signed URL.');
-            }
-          }
-        };
-        xhr.send();
-    }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// AWS Functions End ///////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    
     useEffect(() => {
         !loading && getSavedTextsHandler();
     }, [loading]);
@@ -164,8 +115,7 @@ const Profile = ({ defaultAvatar, loadUser }) => {
                     { 
                         showHide &&
                         <form onSubmit={ (e) => submitAvatar(e) }>
-                            {/* <input type='file' className={classes.uploadAvatar} name='avatar' onChange={ (e) => changeAvFile(e) } accept="images/*" /> */}
-                            <input type='file' className={classes.uploadAvatar} name='avatar' onChange={ (e) => fileOnchange(e) } accept="images/*" />
+                            <input type='file' className={classes.uploadAvatar} name='avatar' onChange={ (e) => changeAvFile(e) } accept="images/*" />
                             <input type="submit" />
                         </form>
                     }
