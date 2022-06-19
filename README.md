@@ -13,3 +13,11 @@
 - Alternatively you can use the arrow keys and Enter button for text navigation as well.
 - Create an account if you want to save your texts or leave comments
 - Share your experience by leaving comments on the Share page.
+
+## Technologies 
+- React 
+- Redux
+- Node
+- Express
+- MongoDB
+- Mongoose
