@@ -58,7 +58,7 @@ const Reply = ({ defaultAvatar, formData, editComment, reply, allUserData, curre
             {/* If activeInputFieldID = { id: reply._id, action: 'edit' } then show the edit field, else show the comment */}
             { activeInputFieldID.id === reply._id && activeInputFieldID.action === 'edit' ?
                 <form className={classes.editForm} onSubmit={(e) => editComment(e, reply._id) }>
-                    <input type='text' name="edit" required={ true } value={ formData.edit } onChange={ (e) => onChangeFormData(e) } />
+                    <input type='text' name="edit" className={classes.commentInput} required={ true } value={ formData.edit } onChange={ (e) => onChangeFormData(e) } />
                     <input type='submit' value="Submit" className={classes.commentBtn} />
                 </form>
                 : <p>{ reply.comment }</p>

@@ -61,7 +61,7 @@ const SingleComment = ({ defaultAvatar, formData, editComment, comment, commentD
             {/* If activeInputFieldID === { id: comment._id, action: 'edit' } then show the edit field, else show the comment */}
             { activeInputFieldID.id === comment._id && activeInputFieldID.action === 'edit' ?
                 <form className={classes.editForm} onSubmit={(e) => editComment(e, comment._id) }>
-                    <input type='text' name="edit" required={ true } value={ formData.edit } onChange={ (e) => onChangeFormData(e) } />
+                    <input type='text' name="edit" className={classes.commentInput} required={ true } value={ formData.edit } onChange={ (e) => onChangeFormData(e) } />
                     <input type='submit' value="Submit" className={classes.commentBtn} />
                 </form>
                 : <p>{ comment.comment }</p>
@@ -86,7 +86,7 @@ const SingleComment = ({ defaultAvatar, formData, editComment, comment, commentD
                 {/* If activeInputFieldID = { id: comment._id, action: 'reply' } then show the reply field, else show nothing */}
                 { (activeInputFieldID.id === comment._id && activeInputFieldID.action === 'reply') && 
                 <form className={classes.replyForm} onSubmit={(e) => replyToComment(e, comment._id)}>
-                    <input type='text' name="reply" value={ formData.reply } required={ true } onChange={ (e) => onChangeFormData(e) } />
+                    <input type='text' name="reply" className={classes.commentInput} value={ formData.reply } required={ true } onChange={ (e) => onChangeFormData(e) } />
                     <input type='submit' value="Leave reply" className={classes.commentBtn} />
                 </form>}
 

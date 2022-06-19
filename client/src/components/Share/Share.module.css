@@ -98,6 +98,13 @@
     margin-left: 50px;
 }
 
+.commentInput {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid gainsboro;
+}
+
 @media (min-width: 678px ) {
     
     .container {

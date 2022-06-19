@@ -166,7 +166,7 @@ const Share = ({ defaultAvatar }) => {
                     <p>Leave a comment about your experience. You must be logged in to leave comments.</p>
                     
                     {currentUser && <form onSubmit={(e) => postComment(e)}>
-                        <input type="text" name="comment" required={ true } value={formData.comment} onChange={(e) => onChangeFormData(e)} />
+                        <input type="text" name="comment" className={classes.commentInput} required={ true } value={formData.comment} onChange={(e) => onChangeFormData(e)} />
                         <input type="submit" value="Post Comment" className={classes.submitComment} />
                     </form>}
 
